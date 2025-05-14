@@ -19,25 +19,26 @@ public class Server {
             }
 
             StringBuilder bin = new StringBuilder();
+            StringBuilder oct = new StringBuilder();
+            StringBuilder hex = new StringBuilder();
             for (char c : clientSentence.toCharArray()) {
                 bin.append(Integer.toBinaryString(c)).append(" ");
-            }
-
-            StringBuilder oct = new StringBuilder();
-            for (char c : clientSentence.toCharArray()) {
                 oct.append(Integer.toOctalString(c)).append(" ");
+                hex.append(Integer.toHexString(c)).append(" ");
             }
 
             int letterCount = clientSentence.replaceAll("\\s+", "").length();
 
-            String[] words = clientSentence.split("\\s+");
-            Arrays.sort(words);
-            String sorted = String.join(" ", words);
+            char[] chars = clientSentence.replaceAll("\\s+", "").toCharArray();
+            Arrays.sort(chars);
+            String sortedLetters = new String(chars);
 
-            String result = "Binario: " + bin.toString().trim() + "\n"
-                    + "Octal: " + oct.toString().trim() + "\n"
-                    + "Número de letras: " + letterCount + "\n"
-                    + "Orden alfa.: " + sorted + "\n";
+            String result = ""
+                + "Binario: " + bin.toString().trim() + "\n"
+                + "Octal: "    + oct.toString().trim() + "\n"
+                + "Hex: "      + hex.toString().trim() + "\n"
+                + "Número de letras: " + letterCount + "\n"
+                + "Orden alfa.: " + sortedLetters + "\n";
 
             outToClient.writeBytes(result);
             clientSocket.close();
