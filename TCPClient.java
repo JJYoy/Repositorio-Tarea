@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.net.*;
 
@@ -8,16 +7,20 @@ public class TCPClient {
         Socket socketConnection = new Socket("DESKTOP-HLD5CDS", 6789);
         DataOutputStream outputWriter = new DataOutputStream(socketConnection.getOutputStream());
         BufferedReader serverResponseReader = new BufferedReader(new InputStreamReader(socketConnection.getInputStream()));
+
         String line;
-        System.out.println("Ingrese texto para convertir y (*EXIT* para terminar):");
+        System.out.println("Ingrese texto y (EXIT para terminar):");
         while ((line = userInputReader.readLine()) != null) {
             outputWriter.writeBytes(line + "\n");
             if (line.equals("EXIT")) {
                 break;
             }
-            String response = serverResponseReader.readLine();
-            System.out.println("RESPUESTA DEL SERVIDOR:\n" + response);
+            String responseLine;
+            while ((responseLine = serverResponseReader.readLine()) != null) {
+                System.out.println(responseLine);
+            }
         }
+
         socketConnection.close();
         userInputReader.close();
     }
