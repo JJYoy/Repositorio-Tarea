@@ -4,7 +4,7 @@ import java.net.*;
 public class TCPClient {
     public static void main(String[] args) throws Exception {
         BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
-        Socket socketConnection = new Socket("localhost", 6789);
+        Socket socketConnection = new Socket("DESKTOP-HLD5CDS", 6789);
         DataOutputStream outputWriter = new DataOutputStream(socketConnection.getOutputStream());
         BufferedReader serverResponseReader = new BufferedReader(new InputStreamReader(socketConnection.getInputStream()));
 
