@@ -7,7 +7,7 @@ public class TCPClient {
         BufferedReader userInputReader = new BufferedReader(
                 new InputStreamReader(System.in));
         
-        Socket socketConnection = new Socket("mi-host", "6789");
+        Socket socketConnection = new Socket("host", "6789");
         
         
         DataOutputStream outputWriter = new DataOutputStream(
@@ -17,7 +17,7 @@ public class TCPClient {
                 new InputStreamReader(socketConnection.getInputStream()));
 
         String line;
-        System.out.println("Ingrese texto (EXIT para terminar):");
+        System.out.println("Ingrese texto para convertir: \n (*EXIT* para terminar):");
         while ((line = userInputReader.readLine()) != null) {
             outputWriter.writeBytes(line + "\n");
             if (line.equals("EXIT")) {
